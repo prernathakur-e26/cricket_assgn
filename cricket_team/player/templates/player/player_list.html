@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <h1>Avalilable Player</h1>
+  </div>
+  <div class="col-md-offset-5 col-md-1">
+    <a  href="{% url 'add_player' %}" type="button" class="btn btn-primary">Add Player</a>
+  </div>
+</div>
+<br>
+<div class="row">
+  {% for obj in object_list %}
+
+    <div class="col-md-3 col-md-offset-1 well" style="width: 25rem;">
+        {% if obj.image %}
+        <img class="card-img-top" src='{{ obj.image.url }}' style="height: 140px; width: 200px;" alt="...">
+        {% else %}
+          <img src="{% static 'images/No-Image-Found.png' %}" style="height: 140px;" class="card-img-top" alt="Logo Not Found">
+        {% endif %}
+
+          <div class="card-body">
+            <h4 class="card-title">{{ obj.first_name }} {{ obj.last_name}}</h4>
+            <a href="{% url 'player_detail' obj.slug %}" class="btn btn-primary">Detail</a>
+          </div>
+    </div>
+
+  {% endfor %}
+<div>
+{% endblock %}
